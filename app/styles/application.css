@@ -3,8 +3,68 @@ body {
 }
 
 .l-container {
+  position: relative;
+
+  background-color: white;
   width: 400px;
-  margin: 0 auto;
-  padding-top: 50px;
+  margin: 50px auto;
+  padding: 10px 20px;
+
+  border: 1px solid #d3d3d3;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0,0,0, 0.1);
+}
+
+h2, h3 {
+  font-size: 22px;
+  font-weight: bold;
+  color: #303030;
+}
+
+h3 {
+  margin: auto;
+}
+
+h2:before {
+  content: "";
+  background: url(../images/icon-description.png);
+  width: 25px;
+  height: 25px;
+  float: left;
+  margin-right: 2px;
+}
+
+h3 {
+  padding-bottom: 20px;
+}
+
+hr {
+  margin: auto 2px;
+  border-top: 1px solid lightgrey;
+}
+
+hr.read_more {
+  border: none;
+  padding-bottom: 20px;
   text-align: center;
+}
+
+hr.read_more:before {
+  content: url(../images/separator.png);
+}
+
+p {
+  font-size: 14px;
+  color: #70747c;
+}
+
+.read_more_control {text-align: right; display: none;}
+.read_more_control button {
+  height: 30px;
+  width: 100px;
+  font-size: 12px;
+  color: white;
+  background: linear-gradient(to bottom, #01c2fb, #03a7ff);
+  border-radius: 4px;
+  margin: 10px 10px;
 }
