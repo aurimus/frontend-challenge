@@ -2,8 +2,7 @@
 
 ### Requirements:
 1. node - download installer from `http://nodejs.org` or use `brew`
-2. bower - `npm install -g bower`
-3. gulp - `npm install -g gulp`
+2. http-server
 
 ### Local setup:
 1. Clone repository
@@ -11,15 +10,9 @@
 
 ```
 $ npm install
-$ bower install
 ```
 
 ### Run server:
-1. Inside main dir run `gulp watch`
-2. Test environment url: `http://localhost:8000/test`
+1. Inside main dir run `webpack --watch`
+2. Open another console and run: `http-server` you can navigate to `http://0.0.0.0:8080/app/`
 
-### More Gulp Tasks:
-
-1. `gulp` - alias for `gulp watch`
-2. `gulp watch` - to run development server
-3. `gulp clean` - to clean all files
