@@ -1,6 +1,7 @@
 'use strict';
 
 var gulp = require('gulp');
+var babel = require('gulp-babel');
 var $ = require('gulp-load-plugins')();
 var mainBowerFiles = require('main-bower-files');
 var livereload = require('gulp-livereload')
@@ -10,10 +11,9 @@ gulp.task('styles', function () {
     .pipe($.size());
 });
 
-gulp.task('scripts', function () {
-  return gulp.src('app/scripts/**/*.js')
-    .pipe($.size());
-});
+// gulp.task('default', function () {
+
+// });
 
 gulp.task('html', ['styles', 'scripts'], function () {
   var jsFilter = $.filter('**/*.js');
@@ -56,6 +56,14 @@ gulp.task('clean', function () {
   return gulp.src(['.tmp', 'dist'], { read: false }).pipe($.clean());
 });
 
+gulp.task('babel', function () {
+  return gulp.src('app/scripts/main.js')
+    .pipe(babel({
+        presets: ['es2015']
+    }))
+    .pipe(gulp.dest('app/dist'));
+});
+
 gulp.task('default', ['clean'], function () {
   gulp.start('watch');
 });
@@ -71,12 +79,12 @@ gulp.task('connect', function () {
   require('http').createServer(app)
     .listen(8080)
     .on('listening', function () {
-      console.log('Started connect web server on http://localhost:8080');
+      console.log('Started connect web server on http://0.0.0.0:8080');
     });
 });
 
 gulp.task('serve', ['connect', 'styles'], function () {
-  require('opn')('http://localhost:8080');
+  require('opn')('http://0.0.0.0:8080');
 });
 
 // inject bower components
@@ -94,7 +102,7 @@ gulp.task('wiredep', function () {
 });
 
 // watch for changes
-gulp.task('watch', ['connect', 'serve'], function () {
+gulp.task('watch', ['babel', 'connect', 'serve'], function () {
   livereload.listen();
 
   gulp.watch([
@@ -107,7 +115,7 @@ gulp.task('watch', ['connect', 'serve'], function () {
   });
 
   gulp.watch('app/styles/**/*.css', ['styles']);
-  gulp.watch('app/scripts/**/*.js', ['scripts']);
+  gulp.watch('app/scripts/**/*.js', ['babel']);
   gulp.watch('app/images/**/*', ['images']);
   gulp.watch('bower.json', ['wiredep']);
 });
