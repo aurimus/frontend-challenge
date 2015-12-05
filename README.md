@@ -10,9 +10,13 @@
 
 ```
 $ npm install
+$ npm install http-server -g
 ```
 
 ### Run server:
 1. Inside main dir run `webpack --watch`
-2. Open another console and run: `http-server` you can navigate to `http://0.0.0.0:8080/app/`
+2. Open another console and run: `http-server` you can navigate to `http://localhost:8080/app/` to view the app
+
+### Run tests
+
 
