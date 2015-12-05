@@ -1,57 +1,34 @@
-import { createStore } from 'redux';
-
-/** FLUX ***/
-
-const SHOW_READMORE = 'SHOW_READMORE'
-const HIDE_READMORE = 'HIDE_READMORE'
-
-function showReadMore () {
-    return {type: SHOW_READMORE}
-}
-
-function hideReadMore () {
-    return {type: HIDE_READMORE}
-}
-
-const initialState = {
-    readmore_visible: false
-}
-
-function App (state = initialState, action) {
-    switch (action.type) {
-        case SHOW_READMORE:
-            return state = {readmore_visible: true};
-        case HIDE_READMORE:
-            return state = {readmore_visible: false};
-        default:
-            return state;
-    }
-
-    return state;
-}
-
-let store = createStore(App, {readmore_visible: false});
+import { toggleReadMore } from './actions';
+import { store } from './store';
 
 /*** View ***/
 
-// Initialize if Javascript enabled
 let $read_more_control = document.querySelector('.read_more_control');
+let $read_more_text = document.querySelector('.read_more_text');
+let $read_more_button = document.querySelector('.read_more_control button');
+
+// Initialize if Javascript enabled
 $read_more_control.style.display = 'block';
 
-// Respond
+// Listen for click coming from view and dispatch action
 
-console.log(store.getState())
+$read_more_button.addEventListener('click', (evt) => {
+    store.dispatch(toggleReadMore());
+});
 
-let $read_more_text = document.querySelector('.read_more_text');
+// Respond to actions coming from "anywhere" (in our case just the view)
 
-store.subscribe(() => {
+const render = () => {
     if (store.getState().readmore_visible) {
         $read_more_text.style.display = 'block';
+        $read_more_button.textContent = 'Show less';
     } else {
         $read_more_text.style.display = 'none';
+        $read_more_button.textContent = 'Show more';
     }
-})
+}
 
-store.dispatch(hideReadMore());
+store.subscribe(render);
 
-console.log('ready!');
+// Initialize
+render();
