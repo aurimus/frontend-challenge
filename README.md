@@ -1,5 +1,7 @@
 # Description Module
 
+An attemt to solve the simpliest of task with FLUX
+
 ### Requirements:
 1. node - download installer from `http://nodejs.org` or use `brew`
 
