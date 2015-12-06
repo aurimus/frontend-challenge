@@ -1,5 +1,5 @@
 import { App } from '../../scripts/store';
-import {toggleReadMore} from '../../scripts/actions';
+import { toggleReadMore } from '../../scripts/actions';
 
 describe('Action handler', () => {
   it('should toggle readmore visibility', () => {
