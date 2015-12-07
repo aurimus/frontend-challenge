@@ -7,10 +7,14 @@ export const initialState = {
     readmore_visible: false
 }
 
-export function App (state = initialState, action) {
+export function Handler (state = initialState, action) {
     switch (action.type) {
         case 'TOGGLE_READMORE':
             return state = {readmore_visible: !state.readmore_visible};
+        case 'HIDE_READMORE':
+            return state = {readmore_visible: false};
+        case 'SHOW_READMORE':
+            return state = {readmore_visible: true};
         default:
             return state;
     }
@@ -18,4 +22,4 @@ export function App (state = initialState, action) {
     return state;
 }
 
-export const store = createStore(App);
+export const store = createStore(Handler);
