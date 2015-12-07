@@ -1,4 +1,5 @@
 import { toggleReadMore } from './actions';
+import { renderButton, renderTextVisiblity } from './render';
 import { store } from './store';
 
 /*** View ***/
@@ -16,19 +17,8 @@ $read_more_button.addEventListener('click', (evt) => {
     store.dispatch(toggleReadMore());
 });
 
-// Respond to actions coming from "anywhere" (in our case just the view)
-
-const render = () => {
-    if (store.getState().readmore_visible) {
-        $read_more_text.style.display = 'block';
-        $read_more_button.textContent = 'Show less';
-    } else {
-        $read_more_text.style.display = 'none';
-        $read_more_button.textContent = 'Show more';
-    }
-}
-
-store.subscribe(render);
+store.subscribe( renderButton.bind($read_more_button) );
+store.subscribe( renderTextVisiblity.bind($read_more_text) );
 
 // Initialize
-render();
+// store.dispatch(toggleReadMore());
